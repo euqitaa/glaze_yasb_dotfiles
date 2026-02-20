@@ -1,0 +1,258 @@
+watch_stylesheet: true
+watch_config: true
+debug: false
+
+bars:
+  primary-bar:
+    enabled: true
+    screens: ["*"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      center: false
+    blur_effect:
+      enabled: false
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 30
+    padding:
+      top: 2
+      left: 0
+      bottom: 2
+      right: 0
+    widgets:
+      left:   ["glazewm_workspaces", "media", "taskbar"]
+      center: ["active_window"]
+      right:  ["clock","volume", "bluetooth", "wifi", "power_menu"]
+
+widgets:
+
+  glazewm_workspaces:
+    type: "glazewm.workspaces.GlazewmWorkspacesWidget"
+    options:
+      offline_label: ""
+      hide_empty_workspaces: false
+      hide_if_offline: false
+
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "<span>\uf001</span> {title}"
+      label_alt: "<span>\uf001</span> {title}"
+      hide_empty: true
+      max_field_size:
+        label: 28
+        label_alt: 28
+      show_thumbnail: false
+      controls_only: false
+      controls_left: true
+      controls_hide: true
+      icons:
+        prev_track: "\ue892"
+        next_track: "\ue893"
+        play: "\ue768"
+        pause: "\ue769"
+      callbacks:
+        on_left: "toggle_label"
+        on_right: "toggle_media_menu"
+      media_menu:
+        blur: false
+        round_corners: false
+        border_color: "none"
+        alignment: "left"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        thumbnail_corner_radius: 0
+        thumbnail_size: 80
+        max_title_size: 60
+        max_artist_size: 40
+        show_source: false
+      media_menu_icons:
+        play: "\ue768"
+        pause: "\ue769"
+        prev_track: "\ue892"
+        next_track: "\ue893"
+
+  taskbar:
+    type: "yasb.taskbar.TaskbarWidget"
+    options:
+      animation:
+        enabled: true
+      icon_size: 15
+      ignore_apps:
+        processes: []
+        titles: []
+        classes: []
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: "{win[title]}"
+      label_alt: "[{win[process][name]}]"
+      label_no_window: ""
+      label_icon: true
+      label_icon_size: 14
+      max_length: 56
+      max_length_ellipsis: "..."
+      monitor_exclusive: true
+
+  notes:
+    type: "yasb.notes.NotesWidget"
+    options:
+      label: "<span>\uf46d</span> {count}"
+      label_alt: "{count} notes"
+      container_padding:
+        top: 0
+        left: 0
+        bottom: 0
+        right: 0
+      menu:
+        blur: false
+        round_corners: false
+        border_color: "none"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        max_title_size: 150
+        show_date_time: true
+      icons:
+        note: "\uf46d"
+        delete: "\ue20d"
+      callbacks:
+        on_left: "toggle_menu"
+        on_right: "toggle_label"
+
+  wallpapers:
+    type: "yasb.wallpapers.WallpapersWidget"
+    options:
+      label: "<span>\uf03e</span>"
+      image_path: "C:\\Users\\Sum\\Downloads\\MyWallpapers"
+      change_automatically: false
+      update_interval: 60
+      gallery:
+        enabled: true
+        blur: false
+        image_width: 220
+        image_per_page: 8
+        show_buttons: true
+        orientation: "portrait"
+        image_spacing: 8
+        lazy_load: true
+        lazy_load_delay: 10
+        lazy_load_fadein: 10
+        image_corner_radius: 0
+        enable_cache: true
+
+  weather:
+    type: "yasb.weather.WeatherWidget"
+    options:
+      label: "<span>{icon}</span> {temp}"
+      label_alt: "{location}: {min_temp}-{max_temp}, {humidity}%"
+      api_key: "24b6c2cda6d84066b0304531241908"
+      show_alerts: false
+      update_interval: 600
+      hide_decimal: true
+      units: "metric"
+      location: "auto:ip"
+      callbacks:
+        on_left: "toggle_card"
+        on_right: "toggle_label"
+      icons:
+        sunnyDay:      "\ue30d"
+        clearNight:    "\ue32b"
+        cloudyDay:     "\ue312"
+        cloudyNight:   "\ue311"
+        rainyDay:      "\ue308"
+        rainyNight:    "\ue325"
+        snowyDay:      "\ue30a"
+        snowyNight:    "\ue327"
+        blizzardDay:   "\ue30b"
+        blizzardNight: "\ue328"
+        default:       "\ue30d"
+      weather_card:
+        blur: false
+        round_corners: false
+        border_color: "none"
+        alignment: "right"
+        direction: "down"
+        icon_size: 48
+
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\uf017</span> {%a %b %d  %H:%M}"
+      label_alt: "{%A, %d %B %Y  %H:%M}"
+      timezones: []
+      callbacks:
+        on_left: "toggle_label"
+
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon} </span> {level}"
+      label_alt: "{volume}"
+      volume_icons:
+        - "\uf466 "
+        - "\uf026 "
+        - "\uf027 "
+        - "\uf027 "
+        - "\uf028 "
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:sound"
+
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span> {icon}</span>"
+      label_alt: "{device_name}"
+      icons:
+        bluetooth_on:        "\uf293"
+        bluetooth_off:       "\uf294"
+        bluetooth_connected: "\uf293"
+      callbacks:
+        on_right: "exec cmd.exe /c start ms-settings:bluetooth"
+
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "<span>{wifi_icon} </span>"
+      label_alt: "{wifi_name} {wifi_strength}%"
+      update_interval: 5000
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "{ip_addr}"
+      ethernet_icon: "\uf6ff"
+      wifi_icons:
+        - "\uf1eb"
+        - "\uf1eb"
+        - "\uf1eb"
+        - "\uf1eb"
+        - "\uf1eb"
+      callbacks:
+        on_left: "exec explorer ms-availablenetworks:"
+        on_right: "toggle_label"
+
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "<span align='center'>Power</span>"
+      uptime: true
+      blur: false
+      blur_background: false
+      animation_duration: 200
+      button_row: 5
+      buttons:
+        shutdown: [" \uf011 ", "Shut Down"]
+        restart:  [" \uf2f9 ", "Restart"]
+        signout:  [" \uf2f5 ", "Sign out"]
+        sleep:    [" \uf186 ", "Sleep"]
+        cancel:   ["\uf05e ", "Cancel"]

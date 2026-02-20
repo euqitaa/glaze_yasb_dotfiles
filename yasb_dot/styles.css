@@ -1,0 +1,381 @@
+/* ============================================================
+   YASB — Nord Minimal
+   Widgets: glazewm_workspaces · media · taskbar · active_window
+            notes · wallpapers · weather · clock · volume
+            bluetooth · wifi · power_menu
+   ============================================================ */
+
+:root {
+    --bg:       #2e3440;
+    --base1:    #4c566a;   /* hover surface         */
+    --base2:    #232831;   /* widget background     */
+    --base3:    #3b4252;   /* elevated surfaces     */
+    --red:      #bf616a;
+    --text:     #88c0d0;   /* primary accent/text   */
+    --text-dim: #7d8b9d;   /* muted text / empty ws */
+    --text-mid: rgba(190, 200, 231, 0.7);
+    --bar-h:    26px;      /* must match config height - top/bottom padding */
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+* {
+    font-size:   12px;
+    font-weight: 900;
+    font-family: "JetBrainsMono NF", monospace;
+    color:       #bec8e7;
+    margin:      0;
+    padding:     0;
+    box-sizing:  border-box;
+}
+
+/* ── Bar ────────────────────────────────────────────────────── */
+.yasb-bar {
+    background-color: var(--bg);
+}
+
+/* ── Widget base — every widget inherits this ───────────────── */
+.widget {
+    display:          flex;
+    align-items:      center;
+    height:           var(--bar-h);
+    padding:          0 8px;
+    margin:           0 1px;
+    background-color: var(--base2);
+}
+
+/* First and last widgets flush with screen edge */
+.widget:first-child { margin-left: 0; }
+.widget:last-child  { margin-right: 0; }
+.widget .icon {
+    font-size:   13px;
+    color:       var(--text);
+    display:     flex;
+    align-items: center;
+    line-height: 1;
+    padding:    0 5px;
+    
+}
+.widget .label {
+    color:       var(--text);
+    line-height: 1;
+}
+
+/* ── GlazeWM Workspaces ─────────────────────────────────────── */
+.glazewm-workspaces {
+    background-color: var(--base2);
+    display:          flex;
+    align-items:      center;
+    height:           var(--bar-h);
+    padding:          0 2px;
+    margin:           0 1px;
+}
+.glazewm-workspaces .ws-btn {
+    font-size:        12px;
+    background:       transparent;
+    border:           none;
+    border-bottom:    2px solid transparent;
+    padding:          2px 7px 0;
+    height:           var(--bar-h);
+    display:          flex;
+    align-items:      center;
+    color:            var(--text-dim);
+}
+.glazewm-workspaces .ws-btn.populated        { color: var(--text); }
+.glazewm-workspaces .ws-btn.active_populated,
+.glazewm-workspaces .ws-btn.active_empty     {
+    color:              var(--text);
+    border-bottom-color: var(--text);
+}
+.glazewm-workspaces .ws-btn.active_empty     { color: var(--text-dim); }
+.glazewm-workspaces .ws-btn:hover {
+    background-color: rgba(255,255,255,0.06);
+    color:            var(--text);
+}
+
+/* ── Media ──────────────────────────────────────────────────── */
+.media-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+    max-width:        260px;
+}
+.media-widget .label {
+    color:       var(--text);
+    border:      none;
+    padding:     0;
+    white-space: nowrap;
+    overflow:    hidden;
+    text-overflow: ellipsis;
+}
+.media-widget .icon {
+    margin-right: 5px;
+}
+
+/* Media popup */
+.media-menu {
+    min-width:        200px;
+    max-width:        240px;
+    background-color: var(--base2);
+    padding:          10px 10px 8px;
+}
+.media-menu .title {
+    font-size:   13px;
+    font-weight: 600;
+    color:       #bec8e7;
+}
+.media-menu .artist {
+    font-size:     12px;
+    color:         var(--text-dim);
+    margin-top:    2px;
+    margin-bottom: 8px;
+}
+.media-menu .btn {
+    font-family:    "Segoe Fluent Icons";
+    font-size:      13px;
+    font-weight:    400;
+    min-width:      32px;
+    max-width:      32px;
+    min-height:     32px;
+    max-height:     32px;
+    border-radius:  50%;
+    margin:         0 2px;
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    background:     transparent;
+    border:         none;
+    color:          #bec8e7;
+}
+.media-menu .btn.play            { font-size: 16px; color: var(--text); }
+.media-menu .btn:hover           { background-color: var(--text); color: var(--base2); }
+.media-menu .btn.disabled,
+.media-menu .btn.disabled:hover  { color: var(--base1); background: transparent; }
+.media-menu .playback-time {
+    font-size:  11px;
+    color:      var(--text-dim);
+    margin-top: 10px;
+}
+.media-menu .progress-slider            { height: 6px; margin: 4px 2px; }
+.media-menu .progress-slider::groove    { height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+.media-menu .progress-slider::sub-page  { background: var(--text); height: 2px; border-radius: 2px; }
+
+/* ── Taskbar ────────────────────────────────────────────────── */
+.taskbar-widget {
+    background-color: var(--base2);
+    padding:          0 4px;
+}
+.taskbar-widget .app-container {
+    display:     flex;
+    align-items: center;
+    padding:     0 3px;
+    border:      none;
+    height:      var(--bar-h);
+}
+
+/* ── Active Window ──────────────────────────────────────────── */
+.active-window-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.active-window-widget .icon {
+    display:     flex;
+    align-items: center;
+    margin-right: 6px;
+    border:      none;
+    background:  transparent;
+}
+.active-window-widget .label {
+    color:   var(--text-mid);
+    padding: 0;
+}
+
+/* ── Notes ──────────────────────────────────────────────────── */
+.notes-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.notes-widget .icon  { color: var(--text); margin-right: 4px; }
+.notes-widget .label { color: var(--text-dim); }
+
+.notes-menu {
+    min-width:        340px;
+    max-width:        380px;
+    background-color: var(--base2);
+    padding:          4px;
+}
+.notes-menu .note-item {
+    background:    transparent;
+    border-bottom: 1px solid rgba(136,192,208,0.15);
+    display:       flex;
+    align-items:   center;
+    padding:       5px 4px;
+}
+.notes-menu .note-item:hover  { background-color: var(--base3); }
+.notes-menu .note-item .icon  { font-size: 13px; color: var(--text-dim); padding: 0 6px 0 2px; }
+.notes-menu .note-item .title { font-size: 12px; }
+.notes-menu .note-item .date  { font-size: 11px; color: rgba(255,255,255,0.3); }
+.notes-menu .delete-button {
+    margin-left:  auto;
+    color:        var(--red);
+    background:   transparent;
+    border:       none;
+    font-size:    10px;
+    padding:      4px 8px;
+}
+.notes-menu .delete-button:hover { background: rgba(191,97,106,0.12); }
+.notes-menu .empty-list {
+    color:     rgba(255,255,255,0.15);
+    font-size: 18px;
+    padding:   16px 0;
+    text-align: center;
+}
+.notes-menu .add-button,
+.notes-menu .cancel-button {
+    padding:    5px 12px;
+    background: rgba(255,255,255,0.07);
+    border:     none;
+    color:      #bec8e7;
+}
+.notes-menu .cancel-button      { margin-left: 4px; }
+.notes-menu .add-button:hover,
+.notes-menu .cancel-button:hover { background: rgba(255,255,255,0.14); }
+.notes-menu .scroll-area { background: transparent; border: none; }
+.notes-menu .note-input {
+    background: var(--base3);
+    border:     1px solid transparent;
+    font-size:  12px;
+    padding:    5px 8px;
+    color:      #bec8e7;
+}
+.note-input:focus { border-color: var(--text-dim); outline: none; }
+
+/* ── Wallpapers ─────────────────────────────────────────────── */
+.wallpapers-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.wallpapers-widget .icon { color: var(--text); }
+.wallpapers-gallery-window {
+    background-color: var(--base2);
+    border:           none;
+}
+.wallpapers-gallery-buttons {
+    background:   transparent;
+    color:        var(--text);
+    border:       none;
+    font-size:    14px;
+    padding:      8px 0;
+    margin:       0 8px 8px;
+    width:        600px;
+}
+.wallpapers-gallery-buttons:hover    { background: rgba(255,255,255,0.06); }
+.wallpapers-gallery-image            { border: 3px solid transparent; }
+.wallpapers-gallery-image:hover      { border-color: var(--base1); }
+.wallpapers-gallery-image.focused    { border-color: var(--text); }
+
+/* ── Weather ────────────────────────────────────────────────── */
+.weather-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.weather-widget .icon  { color: var(--text); margin-right: 4px; }
+.weather-widget .label { color: var(--text); }
+
+/* ── Clock ──────────────────────────────────────────────────── */
+.clock-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.clock-widget .icon  { color: var(--text); margin-right: 4px; }
+.clock-widget .label { color: var(--text); background: transparent; }
+
+/* Calendar popup (opened by clock) */
+.calendar { background-color: var(--base2); }
+.calendar .calendar-table,
+.calendar .calendar-table::item {
+    background: transparent;
+    color:      var(--text);
+    border:     none;
+    outline:    none;
+}
+.calendar .calendar-table::item:selected { color: var(--base2); background: var(--text); }
+.calendar .day-label   { margin-top: 16px; }
+.calendar .day-label,
+.calendar .month-label { font-size: 14px; min-width: 110px; max-width: 110px; color: var(--text); }
+.calendar .date-label  { font-size: 56px; color: var(--text); margin-top: -8px; }
+
+/* ── Volume ─────────────────────────────────────────────────── */
+.volume-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.volume-widget .icon  { color: var(--text); margin-right: 4px; }
+.volume-widget .label { color: var(--text); background: transparent; }
+
+.audio-menu { background-color: var(--base2); }
+.volume-slider { border: none; }
+.audio-container .device {
+    background: var(--base3);
+    border:     none;
+    padding:    5px 8px;
+    margin:     2px 0;
+    font-size:  12px;
+}
+.audio-container .device.selected { color: var(--red); }
+.audio-container .device:hover    { background: var(--base1); }
+
+/* ── Bluetooth ──────────────────────────────────────────────── */
+.bluetooth-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.bluetooth-widget .icon  { color: var(--text); }
+.bluetooth-widget .label { color: var(--text); }
+
+/* ── WiFi ───────────────────────────────────────────────────── */
+.wifi-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.wifi-widget .widget-container .icon  { color: var(--text); }
+.wifi-widget .widget-container .label { color: var(--text); }
+
+/* ── Power Menu widget (bar button) ─────────────────────────── */
+.power-menu-widget {
+    background-color: var(--base2);
+    padding:          0 8px;
+}
+.power-menu-widget .label {
+    color:       var(--text);
+    font-size:   13px;
+    background:  transparent;
+}
+
+/* Power Menu popup */
+.uptime {
+    font-size:   13px;
+    color:       var(--text-mid);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.power-menu-popup .button {
+    width:            200px;
+    height:           180px;
+    padding:          0;
+    background:       var(--base3);
+    border:           2px solid transparent;
+    display:          flex;
+    flex-direction:   column;
+    align-items:      center;
+    justify-content:  center;
+    gap:              10px;
+}
+.power-menu-popup .button.hover  { background: var(--base2); border-color: var(--base1); }
+.power-menu-popup .button .icon  { font-size: 52px; color: var(--text); line-height: 1; }
+.power-menu-popup .button .label {
+    font-size:   14px;
+    font-weight: 600;
+    color:       var(--text-mid);
+    font-family: "Bahnschrift", sans-serif;
+}
+.power-menu-popup .button.cancel .icon  { color: var(--red); }
+.power-menu-popup .button.cancel .label { color: rgba(243,139,168,0.9); }
