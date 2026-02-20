@@ -1,4 +1,4 @@
-# GlazeWM + YASB — Configuration
+# GlazeWM + YASB - Configuration
 
 A compact, GitHub-ready overview and quick reference for the GlazeWM and YASB configuration files included in this repository.
 
@@ -65,10 +65,3 @@ glazewm --reload
 
 **License**
  - These config files are provided as-is. Add a license file if you plan to share or reuse widely.
-
----
-
-If you'd like, I can:
- - update the README with example screenshots (if you provide images),
- - add a quick install script for Windows, or
- - generate a minimal `install` PowerShell snippet to symlink these configs.
