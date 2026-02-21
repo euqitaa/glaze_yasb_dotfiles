@@ -1,7 +1,7 @@
 # GlazeWM + YASB - Configuration
 
 A compact, GitHub-ready overview and quick reference for the GlazeWM and YASB configuration files included in this repository.
-
+**Make sure to install "JetBrainsMono Nerd Font Propo" on your system**
 **Contents**
  - **Overview:** Purpose and layout of the configs.
  - **Files:** Quick links to the configuration and stylesheet.
