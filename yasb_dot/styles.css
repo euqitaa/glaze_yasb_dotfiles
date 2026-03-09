@@ -500,3 +500,36 @@ border-bottom: 2px solid #88c0d0;
 .cava-widget .widget-container {
     background-color: var(--base2);
 }
+
+/* BATTERY WIDGET */
+.battery-widget {
+    background-color: var(--base2);
+    padding: 0;
+}
+.battery-widget .icon {
+    color: var(--text);
+    padding: 0 4px;
+}
+.battery-widget .label {
+    background-color: var(--base2);
+    color: var(--text);
+    padding: 0 4px;
+}
+
+/* Charging - green tint */
+.battery-widget.charging .icon,
+.battery-widget.charging .label {
+    color: var(--green);
+}
+
+/* Low battery - yellow warning */
+.battery-widget.low .icon,
+.battery-widget.low .label {
+    color: var(--yellow);
+}
+
+/* Critical battery - red alert */
+.battery-widget.critical .icon,
+.battery-widget.critical .label {
+    color: var(--red);
+}
