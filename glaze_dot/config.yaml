@@ -40,8 +40,9 @@ window_effects:
     corner_style:
       enabled: true
       style: 'square'
+    # Focused windows are fully opaque — draws attention clearly
     transparency:
-      enabled: false
+      enabled: true
       opacity: '100%'
 
   other_windows:
@@ -54,9 +55,10 @@ window_effects:
     corner_style:
       enabled: true
       style: 'square'
+    # Subtle transparency on unfocused windows — reinforces focus without being distracting
     transparency:
-      enabled: false
-      opacity: '100%'
+      enabled: true
+      opacity: '92%'
 
 window_behavior:
   initial_state: 'tiling'
